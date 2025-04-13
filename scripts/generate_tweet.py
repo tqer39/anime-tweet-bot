@@ -21,7 +21,7 @@ def generate_tweet() -> str:
         max_tokens=200,
         temperature=0.7,
     )
-    return response.choices[0].text.strip()
+    return str(response.choices[0].text.strip())
 
 
 if __name__ == "__main__":
