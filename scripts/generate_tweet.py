@@ -31,10 +31,7 @@ def generate_tweet() -> str:
     response = client.responses.create(
         model=model,
         tools=[{"type": "web_search_preview"}],
-        messages=[
-            {"role": "system", "content": "あなたは日本のアニメや声優に詳しいアシスタントです。"},
-            {"role": "user", "content": prompt},
-        ],
+        tool_choice={"type": "web_search_preview"},
         max_tokens=200,
         temperature=0.7,
     )
