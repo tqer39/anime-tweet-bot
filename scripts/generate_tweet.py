@@ -14,7 +14,7 @@ client = OpenAI(
 
 
 def generate_tweet() -> str:
-    model = os.getenv("OPENAI_MODEL", "gpt-4")  # 新しいモデルを指定
+    model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
     date = datetime.now().strftime("%Y年%m月%d日")
     prompt = f"""
 今日は{date}です。
