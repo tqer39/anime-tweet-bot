@@ -54,6 +54,8 @@
     "tflint",
     "tfstate",
     "tqer",
+    "tweepy",
+    "venv",
     "Waka",
     "WAKATIME",
     "yoshi"
