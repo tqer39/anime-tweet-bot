@@ -14,13 +14,15 @@ client = OpenAI(
 
 
 def generate_tweet() -> str:
-    model = os.getenv("OPENAI_MODEL", "gpt-4")  # 新しいモデルを指定
+    model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
     date = datetime.now().strftime("%Y年%m月%d日")
     prompt = f"""
 今日は{date}です。
 
 アニメや声優に関連する「今日は何の日？」の雑学を最大3件、140文字以内で紹介してください。
 日本のX（旧Twitter）向けに、句読点や改行を適度に入れつつ、一般人が「へえ」と思えるような内容にしてください。
+同じタグを複数付けないで。
+タグはまとめて一番最後に付けて。
 
 最後に適度なハッシュタグ（#今日は何の日、#アニメ、#声優 など）を付けてください。
 """

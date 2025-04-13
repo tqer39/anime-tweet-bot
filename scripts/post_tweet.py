@@ -1,21 +1,29 @@
 import os
 import tweepy
+import sys  # エラー終了のために sys をインポート
 from generate_tweet import generate_tweet
 
 
 def post_tweet() -> None:
-    bearer_token = os.getenv("X_BEARER_TOKEN")  # v2エンドポイント用のBearer Token
-    if not bearer_token:
-        raise ValueError("X_BEARER_TOKEN is not set in environment variables.")
+    # Twitter API v2 クライアントを作成
+    client = tweepy.Client(
+        consumer_key=os.getenv("X_API_KEY"),
+        consumer_secret=os.getenv("X_API_SECRET"),
+        access_token=os.getenv("X_ACCESS_TOKEN"),
+        access_token_secret=os.getenv("X_ACCESS_TOKEN_SECRET"),
+    )
 
-    client = tweepy.Client(bearer_token=bearer_token)  # Bearer Token のみを使用
-
+    print("Generating tweet...")
     tweet = generate_tweet()
+    print(f"Tweet generated: {tweet}")
+
     try:
-        response = client.create_tweet(text=tweet)  # v2エンドポイントでツイートを投稿
+        # v2 の create_tweet エンドポイントを使用してツイートを投稿
+        response = client.create_tweet(text=tweet)
         print(f"Tweet posted: {response.data}")
     except tweepy.TweepyException as e:
-        print(f"Failed to post tweet: {e}")
+        print(f"Failed to post tweet: {e}", file=sys.stderr)
+        sys.exit(1)  # エラー終了
 
 
 if __name__ == "__main__":
