@@ -33,10 +33,7 @@ def generate_tweet() -> str:
         max_tokens=200,
         temperature=0.7,
     )
-    content = response["choices"][0]["message"]["content"]
-    if not isinstance(content, str):
-        raise TypeError("Expected a string in the response content")
-    return content.strip()
+    return str(response.choices[0].message.content).strip()
 
 
 if __name__ == "__main__":
