@@ -4,18 +4,12 @@ from generate_tweet import generate_tweet
 
 
 def post_tweet() -> None:
-    api_key = os.getenv("X_API_KEY")
-    api_secret = os.getenv("X_API_SECRET")
-    access_token = os.getenv("X_ACCESS_TOKEN")
-    access_token_secret = os.getenv("X_ACCESS_TOKEN_SECRET")
-
-    auth = tweepy.OAuth1UserHandler(
-        api_key, api_secret, access_token, access_token_secret
-    )
-    api = tweepy.API(auth)
+    bearer_token = os.getenv("X_BEARER_TOKEN")  # v2エンドポイント用のBearer Token
+    client = tweepy.Client(bearer_token=bearer_token)
 
     tweet = generate_tweet()
-    api.update_status(tweet)
+    response = client.create_tweet(text=tweet)  # v2エンドポイントでツイートを投稿
+    print(f"Tweet posted: {response.data}")
 
 
 if __name__ == "__main__":
