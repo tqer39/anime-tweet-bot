@@ -1,5 +1,6 @@
 import os
 import tweepy
+import sys  # エラー終了のために sys をインポート
 from generate_tweet import generate_tweet
 
 
@@ -22,7 +23,8 @@ def post_tweet() -> None:
         response = client.create_tweet(text=tweet)
         print(f"Tweet posted: {response.data}")
     except tweepy.TweepyException as e:
-        print(f"Failed to post tweet: {e}")
+        print(f"Failed to post tweet: {e}", file=sys.stderr)
+        sys.exit(1)  # エラー終了
 
 
 if __name__ == "__main__":
