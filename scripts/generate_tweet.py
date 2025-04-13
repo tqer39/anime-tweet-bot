@@ -27,13 +27,18 @@ def generate_tweet() -> str:
 - 絵文字は少し使って。
 - 文字列タグなどすべて含めて絶対に100文字以内厳守。オーバーすると投稿エラーになるため。
 """
-    # response = client.chat.completions.create(
-    response = client.responses.create(
+    response = client.chat.completions.create(
         model=model,
-        tools=[{"type": "web_search_preview"}],
-        tool_choice={"type": "web_search_preview"},
-        max_tokens=200,
-        temperature=0.7,
+        web_search_options={
+            "search_context_size": "medium",
+            "user_location": {
+                "type": "approximate",
+                "approximate": {
+                    "country": "JP",
+                },
+            },
+        },
+        messages=[{"role": "user", "content": prompt}],
     )
     content = str(response.choices[0].message.content).strip()
     lines = content.split("\n")  # 行ごとに分割
