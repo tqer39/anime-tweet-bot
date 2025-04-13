@@ -5,7 +5,7 @@ from datetime import datetime
 
 def generate_tweet() -> str:
     openai.api_key = os.getenv("OPENAI_API_KEY")
-    model = os.getenv("OPENAI_MODEL", "text-davinci-003")  # デフォルトモデルを指定
+    model = os.getenv("OPENAI_MODEL", "gpt-4")  # 新しいモデルを指定
     date = datetime.now().strftime("%Y年%m月%d日")
     prompt = f"""
 今日は{date}です。
@@ -15,13 +15,19 @@ def generate_tweet() -> str:
 
 最後に適度なハッシュタグ（#今日は何の日、#アニメ、#声優 など）を付けてください。
 """
-    response = openai.Completion.create(
-        engine=model,  # モデルを指定
-        prompt=prompt,
+    response = openai.ChatCompletion.create(
+        model=model,  # 新しい ChatCompletion API を使用
+        messages=[
+            {"role": "system", "content": "あなたは日本のアニメや声優に詳しいアシスタントです。"},
+            {"role": "user", "content": prompt},
+        ],
         max_tokens=200,
         temperature=0.7,
     )
-    return str(response.choices[0].text.strip())
+    content = response["choices"][0]["message"]["content"]
+    if not isinstance(content, str):
+        raise TypeError("Expected a string in the response content")
+    return content.strip()
 
 
 if __name__ == "__main__":
