@@ -3,10 +3,10 @@ name = "anime-tweet-bot"
 version = "0.0.1"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12,<3.13"
 dependencies = [
   "openai==1.73.0",
-  "tweepy==4.14.0",
+  "tweepy==4.15.0",
 ]
 
 [build-system]
@@ -16,7 +16,7 @@ build-backend = "setuptools.build_meta"
 [tool.uv]
 dev-dependencies = [
     "openai==1.73.0",
-    "tweepy==4.14.0",
+    "tweepy==4.15.0",
 ]
 
 [tool.mypy]

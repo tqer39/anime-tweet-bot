@@ -3,19 +3,19 @@ import tweepy
 from generate_tweet import generate_tweet
 
 
-def post_tweet():
-    api_key = os.getenv("X_API_KEY")
-    api_secret = os.getenv("X_API_SECRET")
-    access_token = os.getenv("X_ACCESS_TOKEN")
-    access_token_secret = os.getenv("X_ACCESS_TOKEN_SECRET")
+def post_tweet() -> None:
+    bearer_token = os.getenv("X_BEARER_TOKEN")  # v2エンドポイント用のBearer Token
+    if not bearer_token:
+        raise ValueError("X_BEARER_TOKEN is not set in environment variables.")
 
-    auth = tweepy.OAuth1UserHandler(
-        api_key, api_secret, access_token, access_token_secret
-    )
-    api = tweepy.API(auth)
+    client = tweepy.Client(bearer_token=bearer_token)  # Bearer Token のみを使用
 
     tweet = generate_tweet()
-    api.update_status(tweet)
+    try:
+        response = client.create_tweet(text=tweet)  # v2エンドポイントでツイートを投稿
+        print(f"Tweet posted: {response.data}")
+    except tweepy.TweepyException as e:
+        print(f"Failed to post tweet: {e}")
 
 
 if __name__ == "__main__":

@@ -1,11 +1,20 @@
-import openai
+from openai import OpenAI
 import os
 from datetime import datetime
 
+# Set OpenAI API key
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    raise ValueError("API key is not set.")
 
-def generate_tweet():
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    model = os.getenv("OPENAI_MODEL", "text-davinci-003")  # デフォルトモデルを指定
+client = OpenAI(
+    # This is the default and can be omitted
+    api_key=os.getenv("OPENAI_API_KEY")
+)
+
+
+def generate_tweet() -> str:
+    model = os.getenv("OPENAI_MODEL", "gpt-4")  # 新しいモデルを指定
     date = datetime.now().strftime("%Y年%m月%d日")
     prompt = f"""
 今日は{date}です。
@@ -15,13 +24,16 @@ def generate_tweet():
 
 最後に適度なハッシュタグ（#今日は何の日、#アニメ、#声優 など）を付けてください。
 """
-    response = openai.Completion.create(
-        engine=model,  # モデルを指定
-        prompt=prompt,
+    response = client.chat.completions.create(
+        model=model,  # 新しい ChatCompletion API を使用
+        messages=[
+            {"role": "system", "content": "あなたは日本のアニメや声優に詳しいアシスタントです。"},
+            {"role": "user", "content": prompt},
+        ],
         max_tokens=200,
         temperature=0.7,
     )
-    return response.choices[0].text.strip()
+    return str(response.choices[0].message.content).strip()
 
 
 if __name__ == "__main__":
