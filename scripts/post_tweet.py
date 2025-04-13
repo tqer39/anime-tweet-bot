@@ -12,7 +12,9 @@ def post_tweet() -> None:
         access_token_secret=os.getenv("X_ACCESS_TOKEN_SECRET"),
     )
 
+    print("Generating tweet...")
     tweet = generate_tweet()
+    print(f"Tweet generated: {tweet}")
 
     try:
         # v2 の create_tweet エンドポイントを使用してツイートを投稿
