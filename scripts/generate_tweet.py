@@ -33,7 +33,7 @@ def generate_tweet() -> str:
         max_tokens=200,
         temperature=0.7,
     )
-    return str(response.choices[0].message.content).strip()
+    return str(response.choices[0].message.content).strip() + "\n #アニメ #今日は何の日"
 
 
 if __name__ == "__main__":
