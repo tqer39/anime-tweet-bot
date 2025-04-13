@@ -27,8 +27,10 @@ def generate_tweet() -> str:
 - 絵文字は少し使って。
 - 文字列タグなどすべて含めて絶対に100文字以内厳守。オーバーすると投稿エラーになるため。
 """
-    response = client.chat.completions.create(
-        model=model,  # 新しい ChatCompletion API を使用
+    # response = client.chat.completions.create(
+    response = client.responses.create(
+        model=model,
+        tools=[{"type": "web_search_preview"}],
         messages=[
             {"role": "system", "content": "あなたは日本のアニメや声優に詳しいアシスタントです。"},
             {"role": "user", "content": prompt},
