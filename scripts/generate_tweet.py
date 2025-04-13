@@ -36,7 +36,11 @@ def generate_tweet() -> str:
         max_tokens=200,
         temperature=0.7,
     )
-    return str(response.choices[0].message.content).strip() + "\n #アニメ #今日は何の日"
+    content = str(response.choices[0].message.content).strip()
+    lines = content.split("\n")  # 行ごとに分割
+    while sum(len(line) for line in lines) > 100:  # 合計文字数が100を超える場合
+        lines.pop()  # 最後の行を削除
+    return "\n".join(lines) + "\n #アニメ #今日は何の日"
 
 
 if __name__ == "__main__":
