@@ -8,7 +8,7 @@ def post_tweet() -> None:
     if not bearer_token:
         raise ValueError("X_BEARER_TOKEN is not set in environment variables.")
 
-    client = tweepy.Client(bearer_token=bearer_token)  # Bearer Token のみを使用
+    client = tweepy.Client(bearer_token)  # Bearer Token のみを使用
 
     tweet = generate_tweet()
     try:
