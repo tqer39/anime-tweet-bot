@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 
-def generate_tweet():
+def generate_tweet() -> str:
     openai.api_key = os.getenv("OPENAI_API_KEY")
     model = os.getenv("OPENAI_MODEL", "text-davinci-003")  # デフォルトモデルを指定
     date = datetime.now().strftime("%Y年%m月%d日")

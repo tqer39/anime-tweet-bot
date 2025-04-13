@@ -3,7 +3,7 @@ import tweepy
 from generate_tweet import generate_tweet
 
 
-def post_tweet():
+def post_tweet() -> None:
     api_key = os.getenv("X_API_KEY")
     api_secret = os.getenv("X_API_SECRET")
     access_token = os.getenv("X_ACCESS_TOKEN")
