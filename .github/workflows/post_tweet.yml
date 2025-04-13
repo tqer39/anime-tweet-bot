@@ -2,8 +2,8 @@
 name: Post Anime Tweet
 
 on:
-  schedule:
-    - cron: "0 21 * * *" # 日本時間6:00 (UTC+9)
+  # schedule:
+  #   - cron: "0 21 * * *" # 日本時間6:00 (UTC+9)
   workflow_dispatch:
 
 jobs:
