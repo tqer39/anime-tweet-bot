@@ -10,6 +10,7 @@ def post_tweet() -> None:
         consumer_secret=os.getenv("X_API_SECRET"),
         access_token=os.getenv("X_ACCESS_TOKEN"),
         access_token_secret=os.getenv("X_ACCESS_TOKEN_SECRET"),
+        bearer_token=os.getenv("X_BEARER_TOKEN"),
     )
 
     print("Generating tweet...")
