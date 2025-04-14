@@ -19,23 +19,32 @@ def generate_tweet() -> str:
     prompt = f"""
 今日は{date}です。
 
-アニメや声優に関連する「今日は何の日？」の雑学を最大3件、140文字以内で紹介してください。
-日本のX（旧Twitter）向けに、句読点や改行を適度に入れつつ、一般人が「へえ」と思えるような内容にしてください。
-同じタグを複数付けないで。
-タグはまとめて一番最後に付けて。
-
-最後に適度なハッシュタグ（#今日は何の日、#アニメ、#声優 など）を付けてください。
+- アニメや声優に関連する「今日は何の日？」の雑学を最大3件紹介してください。
+- 公式情報や wikipedia に掲載されている情報を元にしてください。
+- ハルシネーションを避けるため、必ず出典を明記してください。
+- 日本のX（旧Twitter）向けに、句読点や改行を適度に入れつつ、一般人が「へえ」と思えるような内容にしてください。
+- ハッシュタグは含めない。
+- 絵文字は少し使って。
+- 文字列タグなどすべて含めて絶対に100文字以内厳守。オーバーすると投稿エラーになるため。
 """
     response = client.chat.completions.create(
-        model=model,  # 新しい ChatCompletion API を使用
-        messages=[
-            {"role": "system", "content": "あなたは日本のアニメや声優に詳しいアシスタントです。"},
-            {"role": "user", "content": prompt},
-        ],
-        max_tokens=200,
-        temperature=0.7,
+        model=model,
+        web_search_options={
+            "search_context_size": "medium",
+            "user_location": {
+                "type": "approximate",
+                "approximate": {
+                    "country": "JP",
+                },
+            },
+        },
+        messages=[{"role": "user", "content": prompt}],
     )
-    return str(response.choices[0].message.content).strip()
+    content = str(response.choices[0].message.content).strip()
+    lines = content.split("\n")  # 行ごとに分割
+    while sum(len(line) for line in lines) > 100:  # 合計文字数が100を超える場合
+        lines.pop()  # 最後の行を削除
+    return "\n".join(lines) + "\n #アニメ #今日は何の日"
 
 
 if __name__ == "__main__":
