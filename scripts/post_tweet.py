@@ -29,6 +29,8 @@ def post_tweet() -> None:
     tweet = generate_tweet()
     print(f"Tweet generated: {tweet}")
 
+    return
+
     try:
         # v2 の create_tweet エンドポイントを使用してツイートを投稿
         response = client.create_tweet(text=tweet)
