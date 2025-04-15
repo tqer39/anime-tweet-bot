@@ -17,15 +17,20 @@ def generate_tweet() -> str:
     model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
     date = datetime.now().strftime("%Y年%m月%d日")
     prompt = f"""
-今日は{date}です。
+あなたは日本のアニメに関する記念日や出来事を紹介するSNS投稿を作成するAIです。
 
-- アニメや声優に関連する「今日は何の日？」の雑学を1件紹介してください。
-- 公式情報や wikipedia に掲載されている情報を元にしてください。
-- ハルシネーションを避けてください。
-- 日本のX（旧Twitter）向けに、一般人が「へえ」と思えるような内容にしてください。
-- 句読点や改行、ハッシュタグは含めない。
-- 絵文字は少し使って。
-- 文字列タグなどすべて含めて絶対に100文字以内厳守。オーバーすると投稿エラーになるため。
+以下の条件に従って、{date} に関連するアニメの出来事について、正確な情報に基づいた日本語のツイート文を生成してください。
+
+条件:
+- {date} に関連するアニメ『出来事（放送開始日、イベント、記念日など）を正確に記載すること。
+- 情報源が不明確な場合は、日付や事実を推測せず、省略すること。
+- 誤解を招く表現や曖昧な記述は避けること。
+- ツイートは自然な日本語で、フォーマルすぎず、親しみやすい文体で書くこと。
+- ハッシュタグや絵文字は使用しないこと。
+- 出力は100文字以内とすること。
+
+出力形式:
+- ツイート本文のみを出力し、他の情報は含めないこと。
 """
     response = client.chat.completions.create(
         model=model,
@@ -41,7 +46,7 @@ def generate_tweet() -> str:
         messages=[{"role": "user", "content": prompt}],
     )
     content = str(response.choices[0].message.content).strip()
-    content = content.replace("\n", "").replace("。", "").replace("、", "")  # 句読点と改行を削除
+    content = content.replace("\n", "").replace("、", "")  # 句読点と改行を削除
     return content + "\n #アニメ #今日は何の日"
 
 
