@@ -16,6 +16,7 @@ client = OpenAI(
 def generate_tweet() -> str:
     model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
     date = datetime.now().strftime("%m月%d日")
+    print(f"Generating tweet for {date}")
     prompt = f"""
 あなたは日本のアニメファン向けに「今日は何の日？」というテーマでツイートを作成するアシスタントです。
 
