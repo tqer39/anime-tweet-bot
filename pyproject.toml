@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "openai==1.109.1",
-  "tweepy==4.15.0",
+  "tweepy==4.16.0",
 ]
 
 [build-system]
@@ -16,7 +16,7 @@ build-backend = "setuptools.build_meta"
 [tool.uv]
 dev-dependencies = [
     "openai==1.109.1",
-    "tweepy==4.15.0",
+    "tweepy==4.16.0",
 ]
 
 [tool.mypy]
