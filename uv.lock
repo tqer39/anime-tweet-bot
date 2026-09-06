@@ -20,13 +20,13 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "openai", specifier = "==1.109.1" },
-    { name = "tweepy", specifier = "==4.15.0" },
+    { name = "tweepy", specifier = "==4.17.0" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "openai", specifier = "==1.109.1" },
-    { name = "tweepy", specifier = "==4.15.0" },
+    { name = "tweepy", specifier = "==4.17.0" },
 ]
 
 [[package]]
@@ -286,16 +286,16 @@ wheels = [
 
 [[package]]
 name = "tweepy"
-version = "4.15.0"
+version = "4.17.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "oauthlib" },
     { name = "requests" },
     { name = "requests-oauthlib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/99/05/7c2c01bd62900eff24534779f1e1531491dfd872edb6a9d432ae91e18b4b/tweepy-4.15.0.tar.gz", hash = "sha256:1345cbcdf0a75e2d89f424c559fd49fda4d8cd7be25cd5131e3b57bad8a21d76", size = 100268, upload-time = "2025-01-15T21:25:05.307Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/44/54/0599e6d84e1abbe716cb6756f4662f800954b2eaa81fc290378610d8d9af/tweepy-4.17.0.tar.gz", hash = "sha256:c232e9fffa0b15b81d5ff8ec59d46af85e330285ffc3e64614d2418fb9af71b5", size = 87772, upload-time = "2026-07-02T19:11:31.333Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/81/53/ca632ec02085b5c432e98ae1f872a21f2b6bb6c3d022dcf586809cc65cd0/tweepy-4.15.0-py3-none-any.whl", hash = "sha256:64adcea317158937059e4e2897b3ceb750b0c2dd5df58938c2da8f7eb3b88e6a", size = 99379, upload-time = "2025-01-15T21:25:02.856Z" },
+    { url = "https://files.pythonhosted.org/packages/2e/01/c23575054cf6ca9590562ea6f32e75af1ea812d9670ac3f334bbcd50b571/tweepy-4.17.0-py3-none-any.whl", hash = "sha256:1244d7f2959091542f8e4a2c0c4256294e3beb69c0aa26eaf634b126d81eee49", size = 98989, upload-time = "2026-07-02T19:11:29.949Z" },
 ]
 
 [[package]]
