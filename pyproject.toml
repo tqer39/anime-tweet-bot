@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.15,<3.16"
 dependencies = [
-  "openai==1.109.1",
+  "openai==3.33.0",
   "tweepy==4.17.0",
 ]
 
@@ -15,7 +15,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.uv]
 dev-dependencies = [
-    "openai==1.109.1",
+    "openai==3.33.0",
     "tweepy==4.17.0",
 ]
 
