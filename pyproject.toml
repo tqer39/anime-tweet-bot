@@ -18,6 +18,13 @@ dev-dependencies = [
     "openai==1.109.1",
     "tweepy==4.17.0",
 ]
+# tweepy 4.17.0（最新）が oauthlib<4 を要求するが、GHSA-7984-qgvg-3j9c / GHSA-xpv3-w29h-x7cv /
+# GHSA-hj66-6f7g-4r5v の修正は oauthlib 4.0.0 以降にしかない。4.0.0 の破壊的変更は
+# サーバー側（provider）の実装だけで、tweepy が使うクライアント側の署名には及ばない。
+# tweepy が oauthlib 4 を許容したら（tweepy/tweepy#2245）この override を消す。
+override-dependencies = [
+    "oauthlib>=4.0.0",
+]
 
 [tool.mypy]
 strict = true
